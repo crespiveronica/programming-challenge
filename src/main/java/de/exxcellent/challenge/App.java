@@ -1,5 +1,12 @@
 package de.exxcellent.challenge;
 
+import java.io.FileNotFoundException;
+import java.util.List;
+
+import de.exxcellent.challenge.models.Weather;
+import de.exxcellent.challenge.utils.CSVReader;
+import de.exxcellent.challenge.utils.WeatherMetrics;
+
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
  * design. Read: create your own classes and packages as appropriate.
@@ -7,6 +14,19 @@ package de.exxcellent.challenge;
  * @author Benjamin Schmid <benjamin.schmid@exxcellent.de>
  */
 public final class App {
+	
+	static void weather(String path) {
+		try {
+			List<Weather> weathers = CSVReader.read(path);
+			String dayWithSmallestTempSpread = WeatherMetrics.minTempSpread(weathers).getDay().toString();
+	        System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
+
+		} catch (IllegalStateException | FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.print("Unable to read weather.csv file");
+			e.printStackTrace();
+		}
+	}
 
     /**
      * This is the main entry method of your program.
@@ -14,11 +34,9 @@ public final class App {
      */
     public static void main(String... args) {
 
-        // Your preparation code …
-
-        String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …
-        System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
-
+    		weather("weather.csv");
+		
+        
         String teamWithSmallestGoalSpread = "A good team"; // Your goal analysis function call …
         System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
     }
