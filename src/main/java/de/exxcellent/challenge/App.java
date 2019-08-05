@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 import de.exxcellent.challenge.models.Spreadable;
+import de.exxcellent.challenge.models.Team;
 import de.exxcellent.challenge.models.Weather;
 import de.exxcellent.challenge.utils.CSVReader;
 import de.exxcellent.challenge.utils.SpreadableMetrics;
@@ -24,10 +25,24 @@ public final class App {
 
 		} catch (IllegalStateException | FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.print("Unable to read weather.csv file");
+			System.out.printf("Unable to read %s file", path);
 			e.printStackTrace();
 		}
 	}
+	
+
+	static void football(String path) {
+		try {
+			List<Spreadable> teams = new CSVReader(Team.class).read(path);
+			String teamWithSmallestGoalSpread = SpreadableMetrics.minTempSpread(teams).getIdentification();
+	        System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
+		} catch (IllegalStateException | FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.printf("Unable to read %s file", path);
+			e.printStackTrace();
+		}
+	}
+
 
     /**
      * This is the main entry method of your program.
@@ -36,9 +51,8 @@ public final class App {
     public static void main(String... args) {
 
     		weather("weather.csv");
+    		
+    		football("football.csv");
 		
-        
-        String teamWithSmallestGoalSpread = "A good team"; // Your goal analysis function call …
-        System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
     }
 }

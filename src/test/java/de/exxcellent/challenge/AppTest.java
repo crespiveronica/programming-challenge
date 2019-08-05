@@ -27,12 +27,17 @@ public class AppTest {
     }
 
     @Test
-    public void runFootball() {
-        App.main("--football", "football.csv");
+    public void testFootball() {
+    		final ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
+        App.football("football.csv");
+        assertEquals("Team with smallest goal spread       : Aston_Villa\n", output.toString());
+    	
+        //App.main("--football", "football.csv");
     }
     
     @Test
-    public void weather() {
+    public void testWeather() {
     		final ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
         App.weather("weather.csv");
