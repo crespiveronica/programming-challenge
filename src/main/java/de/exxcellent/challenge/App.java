@@ -3,9 +3,10 @@ package de.exxcellent.challenge;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import de.exxcellent.challenge.models.Spreadable;
 import de.exxcellent.challenge.models.Weather;
 import de.exxcellent.challenge.utils.CSVReader;
-import de.exxcellent.challenge.utils.WeatherMetrics;
+import de.exxcellent.challenge.utils.SpreadableMetrics;
 
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
@@ -17,8 +18,8 @@ public final class App {
 	
 	static void weather(String path) {
 		try {
-			List<Weather> weathers = new CSVReader(Weather.class).read(path);
-			String dayWithSmallestTempSpread = WeatherMetrics.minTempSpread(weathers).getDay().toString();
+			List<Spreadable> weathers = new CSVReader(Weather.class).read(path);
+			String dayWithSmallestTempSpread = SpreadableMetrics.minTempSpread(weathers).getIdentification();
 	        System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
 
 		} catch (IllegalStateException | FileNotFoundException e) {

@@ -2,7 +2,7 @@ package de.exxcellent.challenge.models;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class Team {
+public class Team implements Spreadable{
 	
 	@CsvBindByName(column = "Team")
 	private String name;
@@ -48,6 +48,14 @@ public class Team {
         		Team anotherTeam = (Team) obj;
         		return name.equals(anotherTeam.getName()) && goals.equals(anotherTeam.getGoals()) && goalsAllowed.equals(anotherTeam.getGoalsAllowed());
         }
+	}
+	@Override
+	public Integer getSpread() {
+		return Math.abs(goals-goalsAllowed);
+	}
+	@Override
+	public String getIdentification() {
+		return name;
 	}
 	
 	

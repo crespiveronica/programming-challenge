@@ -2,7 +2,7 @@ package de.exxcellent.challenge.models;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class Weather{
+public class Weather implements Spreadable{
 	
 	@CsvBindByName(column = "Day")
 	private Integer day;
@@ -49,7 +49,7 @@ public class Weather{
 		this.maxTemp = maxTemp;
 	}
 
-	public Integer getTempSpread() {
+	public Integer getSpread() {
 		return maxTemp-minTemp;
 	}
 
@@ -63,6 +63,11 @@ public class Weather{
         		return day.equals(anotherWeather.getDay()) && minTemp.equals(anotherWeather.getMinTemp()) && maxTemp.equals(anotherWeather.getMaxTemp());
         }
 		
+	}
+
+	@Override
+	public String getIdentification() {
+		return day.toString();
 	}
 	
 	
