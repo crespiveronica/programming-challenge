@@ -2,7 +2,7 @@ package de.exxcellent.challenge.models;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class Weather {
+public class Weather{
 	
 	@CsvBindByName(column = "Day")
 	private Integer day;
@@ -59,8 +59,8 @@ public class Weather {
 		if (obj == null || getClass() != obj.getClass()) {
             return false;
         } else {
-        		Weather another_weather = (Weather) obj;
-        		return day.equals(another_weather.getDay()) && minTemp.equals(another_weather.getMinTemp()) && maxTemp.equals(another_weather.getMaxTemp());
+        		Weather anotherWeather = (Weather) obj;
+        		return day.equals(anotherWeather.getDay()) && minTemp.equals(anotherWeather.getMinTemp()) && maxTemp.equals(anotherWeather.getMaxTemp());
         }
 		
 	}

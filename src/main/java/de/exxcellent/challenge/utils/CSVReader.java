@@ -6,13 +6,18 @@ import java.util.List;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 
-import de.exxcellent.challenge.models.Weather;
 
-public class CSVReader {
+public class CSVReader<R> {
 	
-	public static List<Weather>  read(String path) throws IllegalStateException, FileNotFoundException {
+	final Class<R> typeParameterClass;
+
+    public CSVReader(Class<R> typeParameterClass) {
+        this.typeParameterClass = typeParameterClass;
+    }
+	
+	public List<R>  read(String path) throws IllegalStateException, FileNotFoundException {
 		
-		return new CsvToBeanBuilder<Weather>(new FileReader("src/main/resources/de/exxcellent/challenge/"+path)).withType(Weather.class).build().parse();
+		return new CsvToBeanBuilder<R>(new FileReader("src/main/resources/de/exxcellent/challenge/"+path)).withType(typeParameterClass).build().parse();
 		
 	}
 

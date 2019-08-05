@@ -17,7 +17,7 @@ public final class App {
 	
 	static void weather(String path) {
 		try {
-			List<Weather> weathers = CSVReader.read(path);
+			List<Weather> weathers = new CSVReader(Weather.class).read(path);
 			String dayWithSmallestTempSpread = WeatherMetrics.minTempSpread(weathers).getDay().toString();
 	        System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
 
