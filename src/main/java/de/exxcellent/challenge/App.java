@@ -49,10 +49,22 @@ public final class App {
      * @param args The CLI arguments passed
      */
     public static void main(String... args) {
-
-    		weather("weather.csv");
+    	
+    		String function = args[0];
+    		String path = args[1];
     		
-    		football("football.csv");
+    	
+    		if(function=="--football") {
+    			football(path);
+    		}
+    		
+    		if(function=="--weather"){
+    			weather(path);
+    		}
+
+    		
+    		
+    		
 		
     }
 }
